@@ -15,4 +15,11 @@ import { AppComponent } from './app.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  public show(): number {
+    console.log();
+    return 1;
+  }
+
+}

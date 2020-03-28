@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "learn-angular"
+    }
+  },
+  "defaultProject": "learn-angular",
+  "cli": {
+    "analytics": "3717be5e-7b17-4e09-8cb6-5d2780b4fe12"
+  }
 }
