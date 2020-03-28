@@ -1,0 +1,20 @@
+<p>this is weather page</p>
+<section class="weather-card" (click)="openDetails()">
+    <span class="city-name_text">Paris</span>
+    <div [ngSwitch]="true">
+        <svg *ngSwitchCase="condition  === 'Cloud'">
+        </svg>
+        <svg *ngSwitchCase="condition  === 'Rain' || condition === Drizzle">
+
+        </svg>
+        <svg *ngSwitchCase="condition  === 'Stom'">
+
+        </svg>
+        <svg *ngSwitchCase="condition  === 'Sunny' || condition === 'Clear'">
+        </svg>
+        <svg *ngSwitchCase="condition  === 'Fog'">
+
+        </svg>
+    </div>
+
+</section>
