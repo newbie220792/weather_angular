@@ -12,4 +12,8 @@ export class WeatherComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //detail weather
+  onDetails(){
+
+  }
 }
