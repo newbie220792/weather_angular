@@ -11,6 +11,7 @@ import { AboutComponent } from './about/about.component';
 import { FooterComponent } from './footer/footer.component';
 import { WeatherComponent } from './weather/weather.component';
 //import icon material of google
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatIconModule
@@ -20,6 +21,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import { ProjectComponent } from './project/project.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +41,7 @@ import { ProjectComponent } from './project/project.component';
     MatButtonModule,
     MatCardModule,
     MatTableModule,
+    MatPaginatorModule,
     HttpClientModule
   ],
   providers: [
