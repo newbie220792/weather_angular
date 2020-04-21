@@ -9,53 +9,77 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  displayedColumns: string[] = ['No', 'Gender', 'Name', 'Localtion', 'Email', 'Login', 'Phone'];
+  private people;
+  displayedColumns: string[] = ['No', 'Gender', 'Name', 'Location', 'Email', 'Login', 'Phone'];
   // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<User>();
-
+  dataSource: MatTableDataSource<User>;
   constructor(private common: WeatherService) { }
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   ngOnInit(): void {
-    this.dataSource.data = this.getDataSource();
+    this.dataSource = new MatTableDataSource<User>(this.getDataSource());
+    // this.dataSource.data = this.getDataSource();
     // this.dataSource.paginator = this.paginator;
     this.dataSource.paginator = this.paginator;
   }
 
-  //get datasource
+  // get datasource
   private getDataSource() {
-    let listUser = Array<User>();
-    let users:User[];
-    var user :User;
+    const listUser = Array<User>();
+    let position  = 0;
     this.common.getRandomUser().subscribe(result => {
       if (result && result.results) {
-        user.no = 0;
-        user.gender = result.results[0].gender;
-        user.name = result.results[0].email;
-        user.localtion = result.results[0].location.city;
-        user.email = result.results[0].email;
-        user.login = result.results[0].login.username;
-        user.phone = result.results[0].phone;
+        result.results.forEach(element => {
+          const user = new User();
+          user.No = position++;
+          user.Gender = result.results[0].gender;
+          user.Name = result.results[0].name.last;
+          user.Location = result.results[0].location.city;
+          user.Email = result.results[0].email;
+          user.Login = result.results[0].login.username;
+          listUser.push(user);
+          user.Phone = result.results[0].phone;
+        });
       }
     });
-    listUser.push(user);
-    // users[0] = user;
-    // console.log(user);
-    console.log(listUser);
     return listUser;
   }
 
 }
 
-//gần giống emun model
-export interface User {
+  // gần giống emun model
+export class User {
   gender: string;
   name: string;
-  localtion: string;
+  location: string;
   email: string;
   login: string;
   phone: string;
   no: number;
+
+  constructor() { }
+  set No(no: number) {
+    this.no = no;
+  }
+
+  set Name(name: string) {
+    this.name = name;
+  }
+  set Gender(gender: string) {
+    this.gender = gender;
+  }
+  set Location(location: string) {
+    this.location = location;
+  }
+  set Email(email: string) {
+    this.email = email;
+  }
+  set Login(login: string) {
+    this.login = login;
+  }
+  set Phone(phone: string) {
+    this.phone = phone;
+  }
 
 }
 

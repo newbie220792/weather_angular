@@ -14,7 +14,7 @@ export class WeatherService {
   });
 
   //url
-  private  URL : string = 'https://randomuser.me/api?result=5';
+  private  URL : string = 'https://randomuser.me/api/?results=20';
   constructor( private http: HttpClient) {
     this.http = http;
    }

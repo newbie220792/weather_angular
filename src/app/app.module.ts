@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
+import {  HttpClientModule } from '@angular/common/http';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -45,8 +45,8 @@ import { ProjectComponent } from './project/project.component';
     HttpClientModule
   ],
   providers: [
-    HttpClientModule,
-    HttpClient],
+    HttpClientModule
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
