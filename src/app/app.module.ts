@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatIconModule
 } from '@angular/material/icon';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatBadgeModule} from '@angular/material/badge';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -45,7 +46,7 @@ import { ProjectComponent } from './project/project.component';
     MatTableModule,
     MatPaginatorModule,
     HttpClientModule,
-    MatBadgeModule,MatChipsModule
+    MatBadgeModule,MatChipsModule,MatProgressSpinnerModule
   ],
   providers: [
     HttpClientModule

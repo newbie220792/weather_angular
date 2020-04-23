@@ -10,6 +10,8 @@ import { CommonServiceService } from '../common-service.service';
 })
 export class HomeComponent implements OnInit {
   private people;
+  isLoading = true;
+  isDataTableLoading = false;
   displayedColumns: string[] = ['No', 'Gender', 'Name', 'Location', 'Email', 'Login', 'Phone'];
   dataSource: MatTableDataSource<User>;
   constructor(private common: CommonServiceService) { }
@@ -21,12 +23,16 @@ export class HomeComponent implements OnInit {
 
   }
 
+  //check load data
+  i
   // get datasource
   private getDataSource() {
     const listUser = Array<User>();
     let position = 1;
     let user: User;
     this.common.getRandomUser().subscribe(result => {
+      this.isLoading = false;
+      this.isDataTableLoading = true;
       if (result && result.results) {
         result.results.forEach(element => {
           user = new User(
@@ -46,7 +52,8 @@ export class HomeComponent implements OnInit {
           this.common.femaleCount$.next(listUser.length - maleCount);
         });
       }
-    });
+
+    }, error => console.log(error));
     return listUser;
   }
 
