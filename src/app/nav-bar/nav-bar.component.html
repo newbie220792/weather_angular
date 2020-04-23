@@ -6,12 +6,25 @@
         <!-- menu -->
         <div class="navbar">
             <ul class="navbar mr-auto">
-                <li class="nav-item active"> <a  href="home" class="nav-link">Home</a></li>
-                <li class="nav-link"> <a  href="about" class="nav-link">About</a></li>
-                <li class="nav-link"> <a href="project" class="nav-link">Project</a></li>
+                <li class="nav-item">
+                    <a routerLink="home" class="nav-link" routerLinkActive="active">
+                        <p>
+                            <span matBadge="{{ userCount }}" matBadgeOverlap="false" matBadgeColor="warn">Home</span>
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-link"> <a routerLink="about" class="nav-link">About</a></li>
+                <li class="nav-link"> <a routerLink="project" class="nav-link">Project</a></li>
             </ul>
         </div>
-        <!-- logo -->
+
+        <!-- mat chips -->
+        <mat-chip-list aria-label="Fish selection">
+            <!-- nam gioi -->
+            <mat-chip color="primary" selected> {{maleCount}} Male</mat-chip>
+            <mat-chip color="primary" selected>{{femaleCount}} Female</mat-chip>
+        </mat-chip-list>
+        <!-- logo tweet-->
         <a aria-label="Angular on twitter" target="_blank" rel="noopener" href="https://twitter.com/angular"
             title="Twitter">
             <svg id="twitter-logo" height="24" data-name="Logo" xmlns="http://www.w3.org/2000/svg"

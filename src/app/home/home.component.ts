@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { WeatherService } from '../weather.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { CommonServiceService } from '../common-service.service';
 
 @Component({
   selector: 'app-home',
@@ -11,34 +11,39 @@ import { MatPaginator } from '@angular/material/paginator';
 export class HomeComponent implements OnInit {
   private people;
   displayedColumns: string[] = ['No', 'Gender', 'Name', 'Location', 'Email', 'Login', 'Phone'];
-  // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource: MatTableDataSource<User>;
-  constructor(private common: WeatherService) { }
+  constructor(private common: CommonServiceService) { }
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<User>(this.getDataSource());
-    // this.dataSource.data = this.getDataSource();
-    // this.dataSource.paginator = this.paginator;
     this.dataSource.paginator = this.paginator;
+
   }
 
   // get datasource
   private getDataSource() {
     const listUser = Array<User>();
-    let position  = 0;
+    let position = 1;
+    let user: User;
     this.common.getRandomUser().subscribe(result => {
       if (result && result.results) {
         result.results.forEach(element => {
-          const user = new User();
-          user.No = position++;
-          user.Gender = result.results[0].gender;
-          user.Name = result.results[0].name.last;
-          user.Location = result.results[0].location.city;
-          user.Email = result.results[0].email;
-          user.Login = result.results[0].login.username;
+          user = new User(
+            position++,
+            element.gender,
+            element.name.last,
+            element.location.city,
+            element.email,
+            element.login.username,
+            element.phone
+          );
           listUser.push(user);
-          user.Phone = result.results[0].phone;
+          console.log(user);
+          this.common.userCount$.next(listUser.length);
+          const maleCount = listUser.filter(person => person.gender === "male").length;
+          this.common.maleCount$.next(maleCount);
+          this.common.femaleCount$.next(listUser.length - maleCount);
         });
       }
     });
@@ -47,7 +52,7 @@ export class HomeComponent implements OnInit {
 
 }
 
-  // gần giống emun model
+// gần giống emun model
 export class User {
   gender: string;
   name: string;
@@ -57,57 +62,17 @@ export class User {
   phone: string;
   no: number;
 
-  constructor() { }
-  set No(no: number) {
+  constructor(no: number, gender: string, name: string, location: string, email: string, login: string, phone: string) {
     this.no = no;
-  }
-
-  set Name(name: string) {
-    this.name = name;
-  }
-  set Gender(gender: string) {
     this.gender = gender;
-  }
-  set Location(location: string) {
+    this.name = name;
     this.location = location;
-  }
-  set Email(email: string) {
     this.email = email;
-  }
-  set Login(login: string) {
     this.login = login;
-  }
-  set Phone(phone: string) {
     this.phone = phone;
   }
 
+
 }
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-  { position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na' },
-  { position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg' },
-  { position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al' },
-  { position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si' },
-  { position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P' },
-  { position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S' },
-  { position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl' },
-  { position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar' },
-  { position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K' },
-  { position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca' },
-];
+
