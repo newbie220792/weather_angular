@@ -9,18 +9,15 @@ import { CommonServiceService } from '../common-service.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  private people;
+  public people;
   isLoading = true;
   isDataTableLoading = false;
   displayedColumns: string[] = ['No', 'Gender', 'Name', 'Location', 'Email', 'Login', 'Phone'];
-  dataSource: MatTableDataSource<User>;
   constructor(private common: CommonServiceService) { }
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<User>(this.getDataSource());
-    this.dataSource.paginator = this.paginator;
-
+    this.people = this.getDataSource();
   }
 
   //check load data
@@ -53,7 +50,10 @@ export class HomeComponent implements OnInit {
         });
       }
 
-    }, error => console.log(error));
+    }, error =>{
+      // show somethings
+      console.log(error);
+    } );
     return listUser;
   }
 

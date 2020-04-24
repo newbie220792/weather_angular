@@ -24,7 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import { ProjectComponent } from './project/project.component';
-
+import {MatSelectModule} from '@angular/material/select';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +46,8 @@ import { ProjectComponent } from './project/project.component';
     MatTableModule,
     MatPaginatorModule,
     HttpClientModule,
-    MatBadgeModule,MatChipsModule,MatProgressSpinnerModule
+    MatBadgeModule,MatChipsModule,MatProgressSpinnerModule,
+    MatSelectModule
   ],
   providers: [
     HttpClientModule

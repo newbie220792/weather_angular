@@ -5,57 +5,46 @@
 
     <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
         <mat-progress-spinner color="primary" mode="indeterminate">
-
         </mat-progress-spinner>
     </mat-card>
-    <div  *ngIf="isDataTableLoading"  class="mat-elevation-z8 mat-table">
-        <table mat-table [dataSource]="dataSource">
 
-            <ng-container matColumnDef="No">
-                <th mat-header-cell *matHeaderCellDef> No </th>
-                <td mat-cell *matCellDef="let element"> {{element.no}} </td>
-            </ng-container>
+    <!-- combobox -->
+    <h4>Select the your country</h4>
+    <mat-form-field>
+        <mat-label>Choose one</mat-label>
+        <mat-select [formControl]="selected" [errorStateMatcher]="matcher">
+            <mat-option>Select just one country</mat-option>
+            <mat-option value="valid">Valid option</mat-option>
+            <mat-option value="invalid">Invalid option</mat-option>
+        </mat-select>
+        <mat-hint>Errors appear instantly!</mat-hint>
+        <mat-error *ngIf="selected.hasError('required')">You must make a selection</mat-error>
+        <mat-error *ngIf="selected.hasError('pattern') && !selected.hasError('required')">
+            Your selection is invalid
+        </mat-error>
+    </mat-form-field>
 
-            <!-- Gender Column -->
-            <ng-container matColumnDef="Gender">
-                <th mat-header-cell *matHeaderCellDef> Gender </th>
-                <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
-            </ng-container>
-
-            <!-- Name Column -->
-            <ng-container matColumnDef="Name">
-                <th mat-header-cell *matHeaderCellDef> Name </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-            </ng-container>
-
-            <!-- Localtion Column -->
-            <ng-container matColumnDef="Location">
-                <th mat-header-cell *matHeaderCellDef> Location </th>
-                <td mat-cell *matCellDef="let element"> {{element.location}} </td>
-            </ng-container>
-
-            <!-- Email Column -->
-            <ng-container matColumnDef="Email">
-                <th mat-header-cell *matHeaderCellDef> Email </th>
-                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-            </ng-container>
-
-            <!-- Login Column -->
-            <ng-container matColumnDef="Login">
-                <th mat-header-cell *matHeaderCellDef> Login </th>
-                <td mat-cell *matCellDef="let element"> {{element.login}} </td>
-            </ng-container>
-
-            <!-- Phone Column -->
-            <ng-container matColumnDef="Phone">
-                <th mat-header-cell *matHeaderCellDef> Phone </th>
-                <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+    <div *ngIf="isDataTableLoading" class="mat-elevation-z8 mat-table">
+        <table>
+            <tr>
+                <th>{{displayedColumns[0]}}</th>
+                <th>{{displayedColumns[1]}}</th>
+                <th>{{displayedColumns[2]}}</th>
+                <th>{{displayedColumns[3]}}</th>
+                <th>{{displayedColumns[4]}}</th>
+                <th>{{displayedColumns[5]}}</th>
+                <th>{{displayedColumns[6]}}</th>
+            </tr>
+            <tr *ngFor="let person of people">
+                <td>{{person.no}}</td>
+                <td>{{person.gender}}</td>
+                <td>{{person.name}}</td>
+                <td>{{person.location}}</td>
+                <td>{{person.email}}</td>
+                <td>{{person.login}}</td>
+                <td>{{person.phone}}</td>
+            </tr>
         </table>
-        <mat-paginator class="mat-table" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     </div>
     <br>
     <hr>
