@@ -10,6 +10,7 @@ import { CommonServiceService } from '../common-service.service';
 })
 export class HomeComponent implements OnInit {
   public people;
+  public counstries;
   isLoading = true;
   isDataTableLoading = false;
   displayedColumns: string[] = ['No', 'Gender', 'Name', 'Location', 'Email', 'Login', 'Phone'];
@@ -20,10 +21,9 @@ export class HomeComponent implements OnInit {
     this.people = this.getDataSource();
   }
 
-  //check load data
-  i
   // get datasource
   private getDataSource() {
+    this.counstries = Array<string>();
     const listUser = Array<User>();
     let position = 1;
     let user: User;
@@ -44,13 +44,14 @@ export class HomeComponent implements OnInit {
           listUser.push(user);
           console.log(user);
           this.common.userCount$.next(listUser.length);
-          const maleCount = listUser.filter(person => person.gender === "male").length;
+          const maleCount = listUser.filter(person => person.gender === 'male').length;
           this.common.maleCount$.next(maleCount);
           this.common.femaleCount$.next(listUser.length - maleCount);
         });
       }
+      this.counstries.add(user.location);
 
-    }, error =>{
+    }, error => {
       // show somethings
       console.log(error);
     } );

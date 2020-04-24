@@ -1,52 +1,49 @@
 <p>This is radom User API</p>
 <div class="main__container">
-    <!--  show user from api  -->
-    <h1>Table User</h1>
+  <!--  show user from api  -->
+  <h1>Table User</h1>
 
-    <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
-        <mat-progress-spinner color="primary" mode="indeterminate">
-        </mat-progress-spinner>
-    </mat-card>
+  <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+    <mat-progress-spinner color="primary" mode="indeterminate">
+    </mat-progress-spinner>
+  </mat-card>
 
-    <!-- combobox -->
-    <h4>Select the your country</h4>
-    <mat-form-field>
-        <mat-label>Choose one</mat-label>
-        <mat-select [formControl]="selected" [errorStateMatcher]="matcher">
-            <mat-option>Select just one country</mat-option>
-            <mat-option value="valid">Valid option</mat-option>
-            <mat-option value="invalid">Invalid option</mat-option>
-        </mat-select>
-        <mat-hint>Errors appear instantly!</mat-hint>
-        <mat-error *ngIf="selected.hasError('required')">You must make a selection</mat-error>
-        <mat-error *ngIf="selected.hasError('pattern') && !selected.hasError('required')">
-            Your selection is invalid
-        </mat-error>
-    </mat-form-field>
+  <!-- combobox -->
+  <h4>Select the your country</h4>
+  <mat-form-field>
+    <mat-label>Choose one</mat-label>
+    <mat-select>
+      <mat-option>Select just one country</mat-option>
+      <mat-option *ngFor="let country of counstries" [value]="country.value">
+        {{country.viewValue}}
+      </mat-option>
+      <mat-option value="invalid">Invalid option</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-    <div *ngIf="isDataTableLoading" class="mat-elevation-z8 mat-table">
-        <table>
-            <tr>
-                <th>{{displayedColumns[0]}}</th>
-                <th>{{displayedColumns[1]}}</th>
-                <th>{{displayedColumns[2]}}</th>
-                <th>{{displayedColumns[3]}}</th>
-                <th>{{displayedColumns[4]}}</th>
-                <th>{{displayedColumns[5]}}</th>
-                <th>{{displayedColumns[6]}}</th>
-            </tr>
-            <tr *ngFor="let person of people">
-                <td>{{person.no}}</td>
-                <td>{{person.gender}}</td>
-                <td>{{person.name}}</td>
-                <td>{{person.location}}</td>
-                <td>{{person.email}}</td>
-                <td>{{person.login}}</td>
-                <td>{{person.phone}}</td>
-            </tr>
-        </table>
-    </div>
-    <br>
-    <hr>
-    <app-weather></app-weather>
+  <div *ngIf="isDataTableLoading" class="mat-elevation-z8 mat-table">
+    <table>
+      <tr>
+        <th>{{displayedColumns[0]}}</th>
+        <th>{{displayedColumns[1]}}</th>
+        <th>{{displayedColumns[2]}}</th>
+        <th>{{displayedColumns[3]}}</th>
+        <th>{{displayedColumns[4]}}</th>
+        <th>{{displayedColumns[5]}}</th>
+        <th>{{displayedColumns[6]}}</th>
+      </tr>
+      <tr *ngFor="let person of people">
+        <td>{{person.no}}</td>
+        <td>{{person.gender}}</td>
+        <td>{{person.name}}</td>
+        <td>{{person.location}}</td>
+        <td>{{person.email}}</td>
+        <td>{{person.login}}</td>
+        <td>{{person.phone}}</td>
+      </tr>
+    </table>
+  </div>
+  <br>
+  <hr>
+  <app-weather></app-weather>
 </div>

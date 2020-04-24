@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonServiceService } from '../common-service.service';
+import {CommonServiceService} from '../common-service.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -15,13 +15,13 @@ export class NavBarComponent implements OnInit {
   ngOnInit(): void {
     this.common.userCount$.subscribe(count => {
       this.userCount = count;
-    })
+    });
     this.common.maleCount$.subscribe(count => {
       this.maleCount = count;
-    })
+    });
     this.common.femaleCount$.subscribe(count => {
       this.femaleCount = count;
-    })
+    });
 
 
   }
