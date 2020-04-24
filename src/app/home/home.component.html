@@ -8,20 +8,17 @@
     </mat-progress-spinner>
   </mat-card>
 
-  <!-- combobox -->
-  <h4>Select the your country</h4>
-  <mat-form-field>
-    <mat-label>Choose one</mat-label>
-    <mat-select>
-      <mat-option>Select just one country</mat-option>
-      <mat-option *ngFor="let country of counstries" [value]="country.value">
-        {{country.viewValue}}
-      </mat-option>
-      <mat-option value="invalid">Invalid option</mat-option>
-    </mat-select>
-  </mat-form-field>
-
   <div *ngIf="isDataTableLoading" class="mat-elevation-z8 mat-table">
+    <div class="combobox">
+      <mat-form-field>
+        <mat-label>Country</mat-label>
+        <mat-select placeholder="Country" [(ngModel)]="selectCountry" (ngModelChange)="onChange()" >
+          <mat-option *ngFor="let country of counstries" [value]="country.value">
+            {{country.display}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
     <table>
       <tr>
         <th>{{displayedColumns[0]}}</th>
@@ -42,6 +39,10 @@
         <td>{{person.phone}}</td>
       </tr>
     </table>
+    <mat-paginator [length]="100"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
   </div>
   <br>
   <hr>

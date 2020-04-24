@@ -15,13 +15,13 @@ export class CommonServiceService {
   public userCount$ = new BehaviorSubject<number>(0);
   public maleCount$ = new BehaviorSubject<number>(0);
   public femaleCount$ = new BehaviorSubject<number>(0);
-  //url
+  // url
   constructor(private http: HttpClient) {
     this.http = http;
   }
 
   public getRandomUser() {
-    const count = Math.floor(Math.random() *15 ) + 5;
+    const count = Math.floor(Math.random() * 30 ) + 5;
     return this.http.get<any>('https://randomuser.me/api/?results=' + count,
       { headers: this.header, });
   }

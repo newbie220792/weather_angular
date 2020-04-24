@@ -10,7 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { FooterComponent } from './footer/footer.component';
 import { WeatherComponent } from './weather/weather.component';
-//import icon material of google
+// import icon material of google
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
@@ -25,6 +25,7 @@ import { MatCardModule } from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import { ProjectComponent } from './project/project.component';
 import {MatSelectModule} from '@angular/material/select';
+import {FormsModule} from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,20 +36,20 @@ import {MatSelectModule} from '@angular/material/select';
     WeatherComponent,
     ProjectComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatCardModule,
-    MatTableModule,
-    MatPaginatorModule,
-    HttpClientModule,
-    MatBadgeModule,MatChipsModule,MatProgressSpinnerModule,
-    MatSelectModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatButtonModule,
+        MatCardModule,
+        MatTableModule,
+        MatPaginatorModule,
+        HttpClientModule,
+        MatBadgeModule, MatChipsModule, MatProgressSpinnerModule,
+        MatSelectModule, FormsModule
+    ],
   providers: [
     HttpClientModule
     ],

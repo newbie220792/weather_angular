@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { CommonServiceService } from '../common-service.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
+import {CommonServiceService} from '../common-service.service';
 
 @Component({
   selector: 'app-home',
@@ -9,16 +8,29 @@ import { CommonServiceService } from '../common-service.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  public allPeople;
   public people;
-  public counstries;
+  public counstries = [];
+  public selectCountry = '';
   isLoading = true;
   isDataTableLoading = false;
   displayedColumns: string[] = ['No', 'Gender', 'Name', 'Location', 'Email', 'Login', 'Phone'];
-  constructor(private common: CommonServiceService) { }
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  constructor(private common: CommonServiceService) {
+  }
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
   ngOnInit(): void {
-    this.people = this.getDataSource();
+    this.allPeople = this.getDataSource();
+    this.people = this.allPeople;
+  }
+
+  // onChange
+  public onChange() {
+    console.log('on change ', this.selectCountry);
+    this.people = this.allPeople.filter(
+      person => person.location === this.selectCountry);
   }
 
   // get datasource
@@ -42,19 +54,23 @@ export class HomeComponent implements OnInit {
             element.phone
           );
           listUser.push(user);
-          console.log(user);
           this.common.userCount$.next(listUser.length);
           const maleCount = listUser.filter(person => person.gender === 'male').length;
           this.common.maleCount$.next(maleCount);
           this.common.femaleCount$.next(listUser.length - maleCount);
+          if (!this.counstries.includes(user.location)) {
+            this.counstries.push({
+              value: user.location,
+              display: user.location
+            });
+          }
         });
       }
-      this.counstries.add(user.location);
 
     }, error => {
       // show somethings
       console.log(error);
-    } );
+    });
     return listUser;
   }
 
