@@ -12,33 +12,39 @@
     <div class="combobox">
       <mat-form-field>
         <mat-label>Country</mat-label>
-        <mat-select placeholder="Country" [(ngModel)]="selectCountry" (ngModelChange)="onChange()" >
+        <mat-select placeholder="Country" [(ngModel)]="selectCountry" (ngModelChange)="onChange()">
           <mat-option *ngFor="let country of counstries" [value]="country.value">
             {{country.display}}
           </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
-    <table>
-      <tr>
-        <th>{{displayedColumns[0]}}</th>
-        <th>{{displayedColumns[1]}}</th>
-        <th>{{displayedColumns[2]}}</th>
-        <th>{{displayedColumns[3]}}</th>
-        <th>{{displayedColumns[4]}}</th>
-        <th>{{displayedColumns[5]}}</th>
-        <th>{{displayedColumns[6]}}</th>
-      </tr>
-      <tr *ngFor="let person of people">
-        <td>{{person.no}}</td>
-        <td>{{person.gender}}</td>
-        <td>{{person.name}}</td>
-        <td>{{person.location}}</td>
-        <td>{{person.email}}</td>
-        <td>{{person.login}}</td>
-        <td>{{person.phone}}</td>
-      </tr>
-    </table>
+    <div >
+      <table>
+        <tr >
+          <th>
+            <i class="fa fa-sort-amount-asc" aria-hidden="true" (click)="onSort()"> </i>
+            {{displayedColumns[0]}}
+          </th>
+          <th><i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
+            {{displayedColumns[1]}}</th>
+          <th>{{displayedColumns[2]}}</th>
+          <th>{{displayedColumns[3]}}</th>
+          <th>{{displayedColumns[4]}}</th>
+          <th>{{displayedColumns[5]}}</th>
+          <th>{{displayedColumns[6]}}</th>
+        </tr>
+        <tr *ngFor="let person of people">
+          <td>{{person.no}}</td>
+          <td>{{person.gender}}</td>
+          <td>{{person.name}}</td>
+          <td>{{person.location}}</td>
+          <td>{{person.email}}</td>
+          <td>{{person.login}}</td>
+          <td>{{person.phone}}</td>
+        </tr>
+      </table>
+    </div>
     <mat-paginator [length]="100"
                    [pageSize]="10"
                    [pageSizeOptions]="[5, 10, 25, 100]">
@@ -47,4 +53,13 @@
   <br>
   <hr>
   <app-weather></app-weather>
+  <div class="row ">
+    <div class="col-3">
+      <a href="https://www.google.com.vn/" target="_blank"> Google</a>
+
+    </div>
+    <div class="col-9">
+      <p>This is google link</p>
+    </div>
+  </div>
 </div>

@@ -33,6 +33,11 @@ export class HomeComponent implements OnInit {
       person => person.location === this.selectCountry);
   }
 
+  // sort person
+  onSort() {
+    console.log('sort');
+  }
+
   // get datasource
   private getDataSource() {
     this.counstries = Array<string>();
