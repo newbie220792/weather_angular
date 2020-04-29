@@ -26,6 +26,9 @@ import {MatTableModule} from '@angular/material/table';
 import { ProjectComponent } from './project/project.component';
 import {MatSelectModule} from '@angular/material/select';
 import {FormsModule} from '@angular/forms';
+import { UserDetailComponent } from './component/user-detail/user-detail.component';
+import { EditUserComponent } from './component/edit-user/edit-user.component';
+import { ConfirmUserChangeComponent } from './component/confirm-user-change/confirm-user-change.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +38,9 @@ import {FormsModule} from '@angular/forms';
     FooterComponent,
     WeatherComponent,
     ProjectComponent,
+    UserDetailComponent,
+    EditUserComponent,
+    ConfirmUserChangeComponent,
   ],
     imports: [
         BrowserModule,
