@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { CommonServiceService } from '../common-service.service';
 import { Router } from '@angular/router';
 import { UserModule } from '../model/user/user.module';
+import { TimeoutError } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,8 @@ export class HomeComponent implements OnInit {
   public user: UserModule
   isLoading = true;
   isDataTableLoading = false;
+  isError = false
+  public errorMessage 
   displayedColumns: string[] = ['No', 'Gender', 'Name', 'Location', 'Email', 'Login', 'Phone', 'Action'];
 
   constructor(private common: CommonServiceService,
@@ -35,7 +38,6 @@ export class HomeComponent implements OnInit {
 
   // onChange
   public onChange() {
-    console.log('on change ', this.selectCountry);
     this.people = this.allPeople.filter(
       person => person.location === this.selectCountry);
   }
@@ -51,7 +53,7 @@ export class HomeComponent implements OnInit {
     console.log(this.idUser);
     this.route.navigate(['editUser']); //change to user edit component
     console.log();
-    
+
 
   }
 
@@ -94,6 +96,11 @@ export class HomeComponent implements OnInit {
       }
 
     }, error => {
+      setTimeout(() => {
+        this.isLoading = false
+        this.errorMessage = 'The connect to server to broken (time out)'
+        this.isError = true
+      }, 3000);
       // show somethings
       console.log(error);
     });

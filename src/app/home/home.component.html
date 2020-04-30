@@ -7,7 +7,9 @@
     <mat-progress-spinner color="primary" mode="indeterminate">
     </mat-progress-spinner>
   </mat-card>
-
+  <div class="error-message" *ngIf="isError">
+    {{errorMessage}}
+  </div>
   <div *ngIf="isDataTableLoading" class="mat-elevation-z8 mat-table">
     <div class="combobox">
       <mat-form-field>
@@ -19,9 +21,9 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div >
+    <div>
       <table>
-        <tr >
+        <tr>
           <th>
             <i class="fa fa-sort-amount-asc" aria-hidden="true" (click)="onSort()"> </i>
             {{displayedColumns[0]}}
@@ -44,15 +46,13 @@
           <td>{{person.login}}</td>
           <td>{{person.phone}}</td>
           <td>
-            <button class="btn btn-success" (click) = 'onEdit(person.no)' [value] = 'person.no'>Edit</button>
-            <button class="btn btn-danger" (click)= 'onDelete(person.no)'>Delete</button>
+            <button class="btn btn-success" (click)='onEdit(person.no)' [value]='person.no'>Edit</button>
+            <button class="btn btn-danger" (click)='onDelete(person.no)'>Delete</button>
           </td>
         </tr>
       </table>
     </div>
-    <mat-paginator [length]="100"
-                   [pageSize]="10"
-                   [pageSizeOptions]="[5, 10, 25, 100]">
+    <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
     </mat-paginator>
   </div>
   <br>
