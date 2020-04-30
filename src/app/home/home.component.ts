@@ -1,6 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {CommonServiceService} from '../common-service.service';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { CommonServiceService } from '../common-service.service';
+import { Router } from '@angular/router';
+import { UserModule } from '../model/user/user.module';
 
 @Component({
   selector: 'app-home',
@@ -8,18 +10,23 @@ import {CommonServiceService} from '../common-service.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  @Input() userID: Boolean = false;
+  @Input('id') _idUrl: string = '';
   public allPeople;
   public people;
   public counstries = [];
+  public idUser;
   public selectCountry = '';
+  public user: UserModule
   isLoading = true;
   isDataTableLoading = false;
-  displayedColumns: string[] = ['No', 'Gender', 'Name', 'Location', 'Email', 'Login', 'Phone'];
+  displayedColumns: string[] = ['No', 'Gender', 'Name', 'Location', 'Email', 'Login', 'Phone', 'Action'];
 
-  constructor(private common: CommonServiceService) {
+  constructor(private common: CommonServiceService,
+    private route: Router) {
   }
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit(): void {
     this.allPeople = this.getDataSource();
@@ -38,6 +45,20 @@ export class HomeComponent implements OnInit {
     console.log('sort');
   }
 
+  // edit user
+  onEdit(id) {
+    this.idUser = id;
+    console.log(this.idUser);
+    this.route.navigate(['editUser']); //change to user edit component
+    console.log();
+    
+
+  }
+
+  // delete user
+  onDelete(id) {
+    console.log('this person have id' + id);
+  }
   // get datasource
   private getDataSource() {
     this.counstries = Array<string>();
@@ -80,6 +101,7 @@ export class HomeComponent implements OnInit {
   }
 
 }
+
 
 // gần giống emun model
 export class User {

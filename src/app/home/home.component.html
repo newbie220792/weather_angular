@@ -33,6 +33,7 @@
           <th>{{displayedColumns[4]}}</th>
           <th>{{displayedColumns[5]}}</th>
           <th>{{displayedColumns[6]}}</th>
+          <th>{{displayedColumns[7]}}</th>
         </tr>
         <tr *ngFor="let person of people">
           <td>{{person.no}}</td>
@@ -42,6 +43,10 @@
           <td>{{person.email}}</td>
           <td>{{person.login}}</td>
           <td>{{person.phone}}</td>
+          <td>
+            <button class="btn btn-success" (click) = 'onEdit(person.no)' [value] = 'person.no'>Edit</button>
+            <button class="btn btn-danger" (click)= 'onDelete(person.no)'>Delete</button>
+          </td>
         </tr>
       </table>
     </div>
