@@ -57,7 +57,7 @@ import { ConfirmUserChangeComponent } from './component/confirm-user-change/conf
         MatSelectModule, FormsModule
     ],
   providers: [
-    HttpClientModule
+    HttpClientModule,
     ],
   bootstrap: [AppComponent]
 })

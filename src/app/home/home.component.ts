@@ -3,8 +3,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { CommonServiceService } from '../common-service.service';
 import { Router } from '@angular/router';
 import { UserModule } from '../model/user/user.module';
-import { TimeoutError } from 'rxjs';
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -22,7 +20,7 @@ export class HomeComponent implements OnInit {
   isLoading = true;
   isDataTableLoading = false;
   isError = false
-  public errorMessage 
+  public errorMessage
   displayedColumns: string[] = ['No', 'Gender', 'Name', 'Location', 'Email', 'Login', 'Phone', 'Action'];
 
   constructor(private common: CommonServiceService,
@@ -51,10 +49,7 @@ export class HomeComponent implements OnInit {
   onEdit(id) {
     this.idUser = id;
     console.log(this.idUser);
-    this.route.navigate(['editUser']); //change to user edit component
-    console.log();
-
-
+    this.route.navigate(['editUser']); //transit to userEdit component
   }
 
   // delete user
@@ -64,24 +59,23 @@ export class HomeComponent implements OnInit {
   // get datasource
   private getDataSource() {
     this.counstries = Array<string>();
-    const listUser = Array<User>();
+    const listUser = Array<UserModule>();
     let position = 1;
-    let user: User;
     this.common.getRandomUser().subscribe(result => {
       this.isLoading = false;
       this.isDataTableLoading = true;
       if (result && result.results) {
+        let user: UserModule;
         result.results.forEach(element => {
-          user = new User(
-            position++,
-            element.gender,
-            element.name.last,
-            element.location.city,
-            element.email,
-            element.login.username,
-            element.phone
-          );
-          listUser.push(user);
+          // user.no = position++,
+          // user.gender = element.gender,
+          // user.name = element.name.last,
+          // user.location = element.location.city,
+          // user.email = element.email,
+          // user.login = element.login.username,
+          // user.phone = element.phone
+
+          // listUser.push(user);
           this.common.userCount$.next(listUser.length);
           const maleCount = listUser.filter(person => person.gender === 'male').length;
           this.common.maleCount$.next(maleCount);
@@ -98,7 +92,7 @@ export class HomeComponent implements OnInit {
     }, error => {
       setTimeout(() => {
         this.isLoading = false
-        this.errorMessage = 'The connect to server to broken (time out)'
+        this.errorMessage = 'TIME OUT TO CONNET TO SERVER'
         this.isError = true
       }, 3000);
       // show somethings
@@ -109,28 +103,5 @@ export class HomeComponent implements OnInit {
 
 }
 
-
-// gần giống emun model
-export class User {
-  gender: string;
-  name: string;
-  location: string;
-  email: string;
-  login: string;
-  phone: string;
-  no: number;
-
-  constructor(no: number, gender: string, name: string, location: string, email: string, login: string, phone: string) {
-    this.no = no;
-    this.gender = gender;
-    this.name = name;
-    this.location = location;
-    this.email = email;
-    this.login = login;
-    this.phone = phone;
-  }
-
-
-}
 
 

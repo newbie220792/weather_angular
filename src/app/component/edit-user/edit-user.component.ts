@@ -6,12 +6,12 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
-  @Input() userID: Boolean = false;
-  @Input() value : string;
+  @Input() round: Boolean = false;
+  @Input() name : string;
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.value);
+    console.log(this.name);
   }
 
 }

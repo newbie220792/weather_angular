@@ -7,7 +7,7 @@
     <mat-progress-spinner color="primary" mode="indeterminate">
     </mat-progress-spinner>
   </mat-card>
-  <div class="error-message" *ngIf="isError">
+  <div class="error" *ngIf="isError">
     {{errorMessage}}
   </div>
   <div *ngIf="isDataTableLoading" class="mat-elevation-z8 mat-table">
@@ -37,8 +37,8 @@
           <th>{{displayedColumns[6]}}</th>
           <th>{{displayedColumns[7]}}</th>
         </tr>
-        <tr *ngFor="let person of people">
-          <td>{{person.no}}</td>
+        <tr *ngFor="let person of people"  >
+          <td >{{person.no}} </td>
           <td>{{person.gender}}</td>
           <td>{{person.name}}</td>
           <td>{{person.location}}</td>
@@ -46,7 +46,7 @@
           <td>{{person.login}}</td>
           <td>{{person.phone}}</td>
           <td>
-            <button class="btn btn-success" (click)='onEdit(person.no)' [value]='person.no'>Edit</button>
+            <button class="btn btn-success" (click)='onEdit(person.no)'>Edit</button>
             <button class="btn btn-danger" (click)='onDelete(person.no)'>Delete</button>
           </td>
         </tr>
