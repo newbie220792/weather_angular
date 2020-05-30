@@ -9,22 +9,24 @@ import { UserModule } from '../model/user/user.module';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  // tslint:disable-next-line: ban-types
   @Input() userID: Boolean = false;
-  @Input('id') _idUrl: string = '';
+  // tslint:disable-next-line: no-input-rename
+  @Input('id') id = '';
   public allPeople;
   public people;
   public counstries = [];
   public idUser;
   public selectCountry = '';
-  public user: UserModule
+  public user: UserModule;
   isLoading = true;
   isDataTableLoading = false;
-  isError = false
-  public errorMessage
+  isError = false;
+  public errorMessage;
   displayedColumns: string[] = ['No', 'Gender', 'Name', 'Location', 'Email', 'Login', 'Phone', 'Action'];
 
   constructor(private common: CommonServiceService,
-    private route: Router) {
+              private route: Router) {
   }
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -49,7 +51,7 @@ export class HomeComponent implements OnInit {
   onEdit(id) {
     this.idUser = id;
     console.log(this.idUser);
-    this.route.navigate(['editUser']); //transit to userEdit component
+    this.route.navigate(['editUser']); // transit to userEdit component
   }
 
   // delete user
@@ -60,12 +62,12 @@ export class HomeComponent implements OnInit {
   private getDataSource() {
     this.counstries = Array<string>();
     const listUser = Array<UserModule>();
-    let position = 1;
+    const position = 1;
     this.common.getRandomUser().subscribe(result => {
       this.isLoading = false;
       this.isDataTableLoading = true;
       if (result && result.results) {
-        let user: UserModule;
+        // let user: UserModule;
         result.results.forEach(element => {
           // user.no = position++,
           // user.gender = element.gender,
@@ -80,20 +82,20 @@ export class HomeComponent implements OnInit {
           const maleCount = listUser.filter(person => person.gender === 'male').length;
           this.common.maleCount$.next(maleCount);
           this.common.femaleCount$.next(listUser.length - maleCount);
-          if (!this.counstries.includes(user.location)) {
-            this.counstries.push({
-              value: user.location,
-              display: user.location
-            });
-          }
+          // if (!this.counstries.includes(user.location)) {
+          //   this.counstries.push({
+          //     value: user.location,
+          //     display: user.location
+          //   });
+          // }
         });
       }
 
     }, error => {
       setTimeout(() => {
-        this.isLoading = false
-        this.errorMessage = 'TIME OUT TO CONNET TO SERVER'
-        this.isError = true
+        this.isLoading = false;
+        this.errorMessage = 'TIME OUT TO CONNET TO SERVER';
+        this.isError = true;
       }, 3000);
       // show somethings
       console.log(error);

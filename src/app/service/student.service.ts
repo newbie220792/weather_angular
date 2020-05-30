@@ -8,77 +8,77 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class StudentService {
-  private httpClient: HttpClient
-
-  private URL = 'http://localhost:3000/'
+  private httpClient: HttpClient;
+  readonly x: number;
+  private URL = 'http://localhost:3000/';
   constructor(private httpService: ServiceHttpService) {
     this.httpService.httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
-    })
-    this.httpService.url = this.URL + "students"
+    });
+    this.httpService.url = this.URL + 'students';
   }
 
   // get list student
   getStudents(): Array<StudentModule> {
-    let students: Array<StudentModule> = new Array()
-    let stu: StudentModule
+    let students;
     this.httpService.get().subscribe(data => {
-      if (data) {
-        data.forEach(e => {
-
-        })
-      }
-      students.push()
-    }), error => {
+      students = new Array(JSON.parse(data));
+      students.forEach(e => {
+        console.log(e);
+      });
+      // tslint:disable-next-line: no-unused-expression
+    }), (error: any) => {
       setTimeout(() => {
-        throwError('Time out, Try to connect to server!!!')
-      }, 6000); //time out when load data over 6 sec
-      throwError(error)
-    }
+        throwError('Time out, Try to connect to server again!!!');
+      }, 6000); // time out when load data over 6 sec
+      throwError(error);
+    };
+    // tslint:disable-next-line: triple-equals
     if (students == null || students.length == 0) {
-      throwError('Something bad happened; please try again later.')
+      throwError('Something bad happened; please try again later.');
     }
-    return students
+    return students;
   }
 
-  // add user 
+  // add user
   postStudents() {
     const data = {
-      "id": 4,
-      "title": "json-server",
-      "author": "typicode"
-    }
+      id: 4,
+      title: 'json-server',
+      author: 'typicode'
+    };
+    // tslint:disable-next-line: no-shadowed-variable
     this.httpService.post(data).subscribe((data => {
       console.log(data);
 
     }), error => {
       console.log(error);
-    })
+    });
   }
 
   // delete student
   deleteStudentById(idStu: number) {
-    this.httpService.url += `/${idStu}`
+    this.httpService.url += `/${idStu}`;
     this.httpService.delete(idStu).subscribe((data => {
       console.log(data);
     }), error => {
       console.log(error);
-    })
+    });
   }
 
-  //edit student
+  // edit student
   updateStudent() {
-    this.httpService.url += "/"
+    this.httpService.url += '/';
     const stu = {
-      "id": 4,
-      "title": "json-server",
-      "author": "it's me"
-    }
+      id: 4,
+      title: 'json-server',
+      author: 'it\'s me'
+    };
     this.httpService.put(stu).subscribe((data => {
       console.log(data);
     }), error => {
       console.log(error);
-    })
+    });
   }
 }
 

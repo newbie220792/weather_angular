@@ -8,41 +8,41 @@ import { catchError } from 'rxjs/operators';
 })
 
 export class ServiceHttpService {
-  public url: string; //this url is declare by service
+  public url: string; // this url is declare by service
   // this is header
-  public httpHeaders
+  public httpHeaders;
 
   constructor(private httpClient: HttpClient) { }
 
-  // get 
+  // get
   public get() {
     return this.httpClient
-      .get<any>(this.url, this.httpHeaders)
-      .pipe(catchError(this.handleError))
+      .get<any[]>(this.url, this.httpHeaders)
+      .pipe(catchError(this.handleError));
   }
 
-  // post 
+  // post
   public post(data) {
     return this.httpClient
       .post<any>(this.url, data, this.httpHeaders)
-      .pipe(catchError(this.handleError))
+      .pipe(catchError(this.handleError));
   }
 
   // delete
   public delete(data: any) {
     return this.httpClient
       .delete<any>(this.url)
-      .pipe(catchError(this.handleError))
+      .pipe(catchError(this.handleError));
   }
 
   // update
   public put(data: any) {
     return this.httpClient
       .put(this.url, data, this.httpHeaders)
-      .pipe(catchError(this.handleError))
+      .pipe(catchError(this.handleError));
   }
 
-  
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
@@ -57,5 +57,5 @@ export class ServiceHttpService {
     // return an observable with a user-facing error message
     return throwError(
       'Something bad happened; please try again later.');
-  };
+  }
 }

@@ -19,20 +19,22 @@ export class ProjectComponent implements OnInit {
 
   // get students
   public getStudents() {
-    this.studentService.getStudents()
+    const listStu = this.studentService.getStudents();
+    // tslint:disable-next-line: no-unused-expression
+    console.log(listStu.length);
   }
 
-  //add students
-  public postStudent(){
+  // add students
+  public postStudent() {
     this.studentService.postStudents();
   }
 
-  public deleteStuById(){
-    this.studentService.deleteStudentById(1)
+  public deleteStuById() {
+    this.studentService.deleteStudentById(1);
   }
 
-  public updateStudent(){
-    this.studentService.updateStudent()
+  public updateStudent() {
+    this.studentService.updateStudent();
   }
 }
 
